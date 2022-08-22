@@ -16,18 +16,18 @@ This course is part of the [MS in Data Science program at the University of San 
 
 # Course details
 
-**INSTRUCTOR.** [Terence Parr](http://parrt.cs.usfca.edu). I’m a professor in the computer science and [data science program](https://www.usfca.edu/arts-sciences/graduate-programs/data-science) departments and was founding director of the MS in Analytics program at USF (which became the MS data science program).  Please call me Terence or Professor (not “Terry”).
+**INSTRUCTOR.** [Mustafa Hajij](https://www.usfca.edu/faculty/mustafa-hajij). I’m an assistant professor in the [data science program](https://www.usfca.edu/arts-sciences/graduate-programs/data-science) department.
 
 **OFFICE HOURS**
 
-Terence is generally available on slack or email on-demand.
+I am generally available on slack or email on-demand.
 
 **SPATIAL COORDINATES:**<br>
 
 * Downtown campus combined rooms 155-156 on main floor.
-* My office is room 525 @ 101 Howard
+* My office is room 522 @ 101 Howard
 
-**TEMPORAL COORDINATES.** Tue Aug 24, 2021 - Thur Oct 14, 2021 with 2 Sections of live lecture: 10am-11:50am and 1pm-2:50pm.  Morning lecture will be zoom recorded for any remaining remote students.
+
 
 **INSTRUCTION FORMAT**. Live class runs for ~2 hours, 2 days/week. Instructor-student interaction during lecture is encouraged by speaking up in zoom. We'll often mix in mini-exercises / labs during class. All programming will be done in the Python 3 programming language, unless otherwise specified.
 
