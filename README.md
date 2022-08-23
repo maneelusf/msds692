@@ -24,7 +24,7 @@ I am generally available on slack or email on-demand.
 
 **SPATIAL COORDINATES:**<br>
 
-* Downtown campus combined rooms 155-156 on main floor.
+* Lectures are given in Downtown campus 101 Howard 527.
 * My office is room 522 @ 101 Howard
 
 
