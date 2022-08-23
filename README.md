@@ -38,24 +38,23 @@ I am generally available on slack or email on-demand.
 <!--
 | Artifact | Grade Weight | Due date |
 |--------|--------|--------|
-|[Data pipeline](https://github.com/parrt/msds692/blob/master/hw/pipeline.md)| 5%| Thu, Oct 22 |
-|[Search Engine Implementation](https://github.com/parrt/msds692/blob/master/hw/search.md)| 11% | Tue, Nov 3 |
-|[TFIDF document summarization](https://github.com/parrt/msds692/blob/master/hw/tfidf.md)| 9%| Thu, Nov 12 |
-|[Recommending Articles](https://github.com/parrt/msds692/blob/master/hw/recommender.md)| 7% | Thu, Nov 19 |
-|[Tweet Sentiment Analysis](https://github.com/parrt/msds692/blob/master/hw/sentiment.md)| 9% | Thu, Dec 3 |
-| [Code reviews](hw/code-review.ipynb) for 5 projects | 5% | Due 11:59PM on day associated project is due |
-|Exam 1| 27%| 2-3:30PM Tue, Nov 10 and 12:01AM-1:31AM Nov 11 |
-|Exam 2| 27%| 2-3:30PM Mon, Dec 7 and 12:01AM-1:31AM Dec 8|
+|[Data pipeline](https://github.com/parrt/msds692/blob/master/hw/pipeline.md)| 5%| Fri, Sep 02 |
+|[Search Engine Implementation](https://github.com/parrt/msds692/blob/master/hw/search.md)| 12% | Fri, Sep 16 |
+|[TFIDF document summarization](https://github.com/parrt/msds692/blob/master/hw/tfidf.md)| 10%| Fri, Sep 23 |
+|[Recommending Articles](https://github.com/parrt/msds692/blob/master/hw/recommender.md)| 9% | Fri, Sep 30 |
+|[Tweet Sentiment Analysis](https://github.com/parrt/msds692/blob/master/hw/sentiment.md)| 9% | Fri, Oct 3 |
+|Exam 1| 30%| 2-3:30PM Tue, Nov 10 and 12:01AM-1:31AM Sep 28 |
+|Exam 2| 30%| 2-3:30PM Mon, Dec 7 and 12:01AM-1:31AM Oct 14 |
 -->
 
 | Artifact | Grade Weight | Due date |
 |--------|--------|--------|
-|[Data pipeline](https://github.com/parrt/msds692/blob/master/hw/pipeline.md)| 5%| Tue, Aug 31, 1pm (start of section 2) |
-|[Search Engine Implementation](https://github.com/parrt/msds692/blob/master/hw/search.md)| 12% | Tue, Sep 14, 1pm |
-|[TFIDF document summarization](https://github.com/parrt/msds692/blob/master/hw/tfidf.md)| 10%| Thu, Sep 23, 1pm |
-|[Recommending Articles](https://github.com/parrt/msds692/blob/master/hw/recommender.md)| 9% | Sat, Oct 2 11:59pm |
-|[Tweet Sentiment Analysis](https://github.com/parrt/msds692/blob/master/hw/sentiment.md)| 9% | Tue, Oct 12 1pm |
-|Exam 1| 25%| Tue, Sep 21 |
+|[Data pipeline](https://github.com/parrt/msds692/blob/master/hw/pipeline.md)| 5%| Fri, Sep 02 1pm (start of section 2) |
+|[Search Engine Implementation](https://github.com/parrt/msds692/blob/master/hw/search.md)| 12% | Fri, Sep 16, 1pm |
+|[TFIDF document summarization](https://github.com/parrt/msds692/blob/master/hw/tfidf.md)| 10%| Fri, Sep 23, 1pm |
+|[Recommending Articles](https://github.com/parrt/msds692/blob/master/hw/recommender.md)| 9% | Fri, Sep 30 1pm |
+|[Tweet Sentiment Analysis](https://github.com/parrt/msds692/blob/master/hw/sentiment.md)| 9% | Fri, Oct 3 1pm |
+|Exam 1| 25%| Tue, Sep 28 |
 |Exam 2| 30%| Thu, Oct 14 |
 
 *I reserve the right to change projects until the day they are assigned.*
