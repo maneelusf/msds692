@@ -38,28 +38,28 @@ I am generally available on slack or email on-demand.
 <!--
 | Artifact | Grade Weight | Due date |
 |--------|--------|--------|
-|[Data pipeline](https://github.com/parrt/msds692/blob/master/hw/pipeline.md)| 5%| Fri, Sep 02 |
-|[Search Engine Implementation](https://github.com/parrt/msds692/blob/master/hw/search.md)| 12% | Fri, Sep 16 |
-|[TFIDF document summarization](https://github.com/parrt/msds692/blob/master/hw/tfidf.md)| 10%| Fri, Sep 23 |
-|[Recommending Articles](https://github.com/parrt/msds692/blob/master/hw/recommender.md)| 9% | Fri, Sep 30 |
-|[Tweet Sentiment Analysis](https://github.com/parrt/msds692/blob/master/hw/sentiment.md)| 9% | Fri, Oct 3 |
+|[Data pipeline](https://github.com/USFCA-MSDS/msds692/blob/master/hw/pipeline.md)| 5%| Fri, Sep 02 |
+|[Search Engine Implementation](https://github.com/USFCA-MSDS/msds692/blob/master/hw/search.md)| 12% | Fri, Sep 16 |
+|[TFIDF document summarization](https://github.com/USFCA-MSDS/msds692/blob/master/hw/tfidf.md)| 10%| Fri, Sep 23 |
+|[Recommending Articles](https://github.com/USFCA-MSDS/msds692/blob/master/hw/recommender.md)| 9% | Fri, Sep 30 |
+|[Tweet Sentiment Analysis](https://github.com/USFCA-MSDS/msds692/blob/master/hw/sentiment.md)| 9% | Fri, Oct 3 |
 |Exam 1| 30%| 2-3:30PM Tue, Nov 10 and 12:01AM-1:31AM Sep 28 |
 |Exam 2| 30%| 2-3:30PM Mon, Dec 7 and 12:01AM-1:31AM Oct 14 |
 -->
 
 | Artifact | Grade Weight | Due date |
 |--------|--------|--------|
-|[Data pipeline](https://github.com/parrt/msds692/blob/master/hw/pipeline.md)| 5%| Fri, Sep 02 1pm (start of section 2) |
-|[Search Engine Implementation](https://github.com/parrt/msds692/blob/master/hw/search.md)| 12% | Fri, Sep 16, 1pm |
-|[TFIDF document summarization](https://github.com/parrt/msds692/blob/master/hw/tfidf.md)| 10%| Fri, Sep 23, 1pm |
-|[Recommending Articles](https://github.com/parrt/msds692/blob/master/hw/recommender.md)| 9% | Fri, Sep 30 1pm |
-|[Tweet Sentiment Analysis](https://github.com/parrt/msds692/blob/master/hw/sentiment.md)| 9% | Fri, Oct 3 1pm |
+|[Data pipeline](https://github.com/USFCA-MSDS/msds692/blob/master/hw/pipeline.md)| 5%| Fri, Sep 02 1pm (start of section 2) |
+|[Search Engine Implementation](https://github.com/USFCA-MSDS/msds692/blob/master/hw/search.md)| 12% | Fri, Sep 16, 1pm |
+|[TFIDF document summarization](https://github.com/USFCA-MSDS/msds692/blob/master/hw/tfidf.md)| 10%| Fri, Sep 23, 1pm |
+|[Recommending Articles](https://github.com/USFCA-MSDS/msds692/blob/master/hw/recommender.md)| 9% | Fri, Sep 30 1pm |
+|[Tweet Sentiment Analysis](https://github.com/USFCA-MSDS/msds692/blob/master/hw/sentiment.md)| 9% | Fri, Oct 3 1pm |
 |Exam 1| 25%| Tue, Sep 28 |
 |Exam 2| 30%| Thu, Oct 14 |
 
 *I reserve the right to change projects until the day they are assigned.*
 
-All projects are **individual** projects not group efforts! All projects will be graded with the specific input or tests given in the project description, so you understand precisely what is expected of your program. Consequently, projects will be graded in binary fashion: They either work or they do not. The only exception is when your program does not run on the grader's or my machine because of some cross-platform issue. This is typically because a student has hardcoded some file name or directory into their program. In that case, we will take off *a minimum* of 10% instead of giving you a 0, depending on the severity of the mistake.  Some projects will be tested with some hidden unit tests; e.g., see the [evaluation section](https://github.com/parrt/msds692/blob/master/hw/search.md) of the search project.
+All projects are **individual** projects not group efforts! All projects will be graded with the specific input or tests given in the project description, so you understand precisely what is expected of your program. Consequently, projects will be graded in binary fashion: They either work or they do not. The only exception is when your program does not run on the grader's or my machine because of some cross-platform issue. This is typically because a student has hardcoded some file name or directory into their program. In that case, we will take off *a minimum* of 10% instead of giving you a 0, depending on the severity of the mistake.  Some projects will be tested with some hidden unit tests; e.g., see the [evaluation section](https://github.com/USFCA-MSDS/msds692/blob/master/hw/search.md) of the search project.
 
 Please go to github and verify that the website has the proper files for your solution. That is what I will download for testing.
 
@@ -101,14 +101,14 @@ We're going to start the class with a cool [lab to extract coronavirus data from
 
 Before we get to the meat of the course, we need to get familiar with some important tools: the commandline (`Terminal.app`) and `git`.
  
-* [The terminal command-line and python environments](https://github.com/parrt/msds692/blob/master/notes/terminal.pdf)  (Day 1)
-* [Streams/pipes/redirection in the terminal](https://github.com/parrt/msds692/blob/master/notes/streams.pdf) (Day 2)
-* [git and github version control](https://github.com/parrt/msds692/blob/master/notes/git.pdf) (Day 2)
+* [The terminal command-line and python environments](https://github.com/USFCA-MSDS/msds692/blob/master/notes/terminal.pdf)  (Day 1)
+* [Streams/pipes/redirection in the terminal](https://github.com/USFCA-MSDS/msds692/blob/master/notes/streams.pdf) (Day 2)
+* [git and github version control](https://github.com/USFCA-MSDS/msds692/blob/master/notes/git.pdf) (Day 2)
 
 ## Organizing data in memory into structures
 
-* [Hashtable implementations of sets and dictionaries](https://github.com/parrt/msds692/blob/master/notes/hashtable.pdf) (Day 3)
-* [Search Engine Implementation](https://github.com/parrt/msds692/blob/master/hw/search.md) (**project**) (Day 3)
+* [Hashtable implementations of sets and dictionaries](https://github.com/USFCA-MSDS/msds692/blob/master/notes/hashtable.pdf) (Day 3)
+* [Search Engine Implementation](https://github.com/USFCA-MSDS/msds692/blob/master/hw/search.md) (**project**) (Day 3)
 
 <!--
 * [Review object definition / usage](notes/OO.ipynb) (Day 4)
@@ -118,17 +118,17 @@ Before we get to the meat of the course, we need to get familiar with some impor
 
 Most data you encounter will be in the form of human readable text, such as comma-separated value (CSV) files. We begin the course by studying how characters are stored in files and learning about the key data formats.
 
-* [Data pipeline project](https://github.com/parrt/msds692/blob/master/hw/pipeline.md) (Converting stock history from Quandl to various formats) (**project**) (Day 1)
+* [Data pipeline project](https://github.com/USFCA-MSDS/msds692/blob/master/hw/pipeline.md) (Converting stock history from Quandl to various formats) (**project**) (Day 1)
 	* reading delimited data; tsv, csv
-	* reading/generating XML (we'll load complicated XML in [TFIDF project](https://github.com/parrt/msds692/blob/master/hw/tfidf.md))
+	* reading/generating XML (we'll load complicated XML in [TFIDF project](https://github.com/USFCA-MSDS/msds692/blob/master/hw/tfidf.md))
 	* reading/generating json
-* [Representing text in a computer](https://github.com/parrt/msds692/blob/master/notes/chars.pdf); see also [7-bit ascii codes](http://www.asciitable.com/), [unicode vs ascii in python](https://docs.python.org/3/howto/unicode.html) (Day 3)
+* [Representing text in a computer](https://github.com/USFCA-MSDS/msds692/blob/master/notes/chars.pdf); see also [7-bit ascii codes](http://www.asciitable.com/), [unicode vs ascii in python](https://docs.python.org/3/howto/unicode.html) (Day 3)
 * [Excel and CSV data](notes/excel.ipynb) (Day 4)
 * [PDF using pdftotext](notes/pdf.ipynb) (Extracting text from Tesla's marketing brochure) (Day 4)
 * [Manipulating text from the command line](notes/text-cmd-line.ipynb) (Day 4)
 * [HTML](notes/html.ipynb) (Parsing Tesla's IPO prospectus) (Day 5)
 
-There are also plenty of nontext, binary formats. You can learn more from the msds501 boot camp material for [audio processing](https://github.com/parrt/msds501/blob/master/notes/sound.ipynb) and [image processing](https://github.com/parrt/msds501/blob/master/projects/images.md).
+There are also plenty of nontext, binary formats. You can learn more from the msds501 boot camp material for [audio processing](https://github.com/USFCA-MSDS/msds501/blob/master/notes/sound.ipynb) and [image processing](https://github.com/USFCA-MSDS/msds501/blob/master/projects/images.md).
 
 * (code review of sample jsontable functions, more htable discussion)
 
@@ -140,7 +140,7 @@ There are also plenty of nontext, binary formats. You can learn more from the ms
 * [Spacy NLP library](notes/spacy.ipynb) (Day 6)
 * [Computing TFIDF](notes/tfidf.pdf) (Day 6)
 * [TFIDF notebook](notes/tfidf.ipynb)
-* [TFIDF document summarization](https://github.com/parrt/msds692/blob/master/hw/tfidf.md) (**project**) (Day 7)
+* [TFIDF document summarization](https://github.com/USFCA-MSDS/msds692/blob/master/hw/tfidf.md) (**project**) (Day 7)
 
 ## How the web works
 
@@ -150,8 +150,8 @@ Now you know how to work with data files already sitting on your desk, we turn t
 * [client/server architecture](notes/client-server.md) (Day 7)
 * [HTTP](notes/http.md) (Day 8)
 * [flask](notes/flask.md) (Day 8)
-* [Launch AWS box (MSDS501 notes)](https://github.com/parrt/msds501/blob/master/notes/aws.md), AWS launch notes from [Recommending Articles Project](https://github.com/parrt/msds692/blob/master/hw/recommender.md) (Day 9)
-* [Building web servers](https://github.com/parrt/msds692/blob/master/hw/server.md) (**optional project**)
+* [Launch AWS box (MSDS501 notes)](https://github.com/USFCA-MSDS/msds501/blob/master/notes/aws.md), AWS launch notes from [Recommending Articles Project](https://github.com/USFCA-MSDS/msds692/blob/master/hw/recommender.md) (Day 9)
+* [Building web servers](https://github.com/USFCA-MSDS/msds692/blob/master/hw/server.md) (**optional project**)
 * [Web analytics](notes/webanalytics.md) (Day 10)
 * [Cookies](notes/cookies.md), logging in/out (Day 11)
 
