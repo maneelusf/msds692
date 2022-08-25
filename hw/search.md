@@ -10,21 +10,21 @@ The functionality and the overall project itself often come up in data science i
 
 ## Discussion
 
-A **search engine** accepts one or more **terms** and searches a corpus for files matching *all* of those terms.  A **corpus** is just a directory and possibly subdirectories full of text files. If you go to the [American National corpus](http://www.anc.org/data/oanc/contents/), you'll see lots of fun text data. I have extracted articles from [Slate](https://github.com/parrt/msds692/blob/master/data/slate.7z) magazine and also from [Berlitz travelogues](https://github.com/parrt/msds692/blob/master/data/berlitz1.7z).  These are your data sets.  Berlitz is smaller and so I use that in some of my [unit tests in the starterkit](https://github.com/parrt/msds692/tree/master/hw/code/search).  Here is a fragment of a sample search results page as displayed in Chrome (activated from Python); clicking on a link brings up the actual file.
+A **search engine** accepts one or more **terms** and searches a corpus for files matching *all* of those terms.  A **corpus** is just a directory and possibly subdirectories full of text files. If you go to the [American National corpus](http://www.anc.org/data/oanc/contents/), you'll see lots of fun text data. I have extracted articles from [Slate](https://github.com/USFCA-MSDS/msds692/blob/master/data/slate.7z) magazine and also from [Berlitz travelogues](https://github.com/USFCA-MSDS/msds692/blob/master/data/berlitz1.7z).  These are your data sets.  Berlitz is smaller and so I use that in some of my [unit tests in the starterkit](https://github.com/USFCA-MSDS/msds692/tree/master/hw/code/search).  Here is a fragment of a sample search results page as displayed in Chrome (activated from Python); clicking on a link brings up the actual file.
 
 | HTML output        | File Content |
 | ---------- | -----
 | <img src="figures/search-page.png" width=300> |<img src="figures/search-file-page.png" width=350>|
 
-In repo `search-`*userid*, you're going to implement 3 different search mechanisms using code derived from the [starter kit files](https://github.com/parrt/msds692/tree/master/hw/code/search). The actual search   mechanism of your code goes in these three files:
+In repo `search-`*userid*, you're going to implement 3 different search mechanisms using code derived from the [starter kit files](https://github.com/USFCA-MSDS/msds692/tree/master/hw/code/search). The actual search   mechanism of your code goes in these three files:
 
-1. Linear search; file [linear_search.py](https://github.com/parrt/msds692/tree/master/hw/code/search/linear_search.py)
-2. Hashtable via built in Python `dict` objects; file [index_search.py](https://github.com/parrt/msds692/tree/master/hw/code/search/index_search.py)
-3. Hashtable that you implement yourself; file [myhtable_search.py](https://github.com/parrt/msds692/tree/master/hw/code/search/myhtable_search.py)
+1. Linear search; file [linear_search.py](https://github.com/USFCA-MSDS/msds692/tree/master/hw/code/search/linear_search.py)
+2. Hashtable via built in Python `dict` objects; file [index_search.py](https://github.com/USFCA-MSDS/msds692/tree/master/hw/code/search/index_search.py)
+3. Hashtable that you implement yourself; file [myhtable_search.py](https://github.com/USFCA-MSDS/msds692/tree/master/hw/code/search/myhtable_search.py)
 
 All three mechanism should give exactly the same results, but you will notice that the linear search is extremely slow. On my really fast machine with an SSD, it takes about five seconds to search through the Slate data. It has to open and search about 4500 files. With either of the hash tables, it's a matter of milliseconds. It's slow the first time you load all of the files regardless of the technique, but the indexed search is walking all of the files the first time only.
 
-File [search.py](https://github.com/parrt/msds692/tree/master/hw/code/search/search.py) is the main program, which you execute like this from the `search-`*userid* directory:
+File [search.py](https://github.com/USFCA-MSDS/msds692/tree/master/hw/code/search/search.py) is the main program, which you execute like this from the `search-`*userid* directory:
 
 ```bash
 $ python search.py linear ~/data/slate
@@ -50,7 +50,7 @@ After you enter the search terms and hit return, the Python program pops up your
 
 Your first task is to perform a brain-dead linear search, which looks at each file in turn to see if it contains all of the search terms. If it does, that filename is included in the list (not `set`) of matching documents. (Function `results()` expects a list, not a set.) The time complexity is *O(kn)* for an average of *k* words per file and *n* files; still, it is about *O(n)*: the order of the number of files.
 
-Given a list of fully-qualified filenames for files containing the search terms, the main program in [search.py](https://github.com/parrt/msds692/tree/master/hw/code/search/search.py) uses function `results()` to get a string containing HTML, which `search.py` writes to file `/tmp/results.html`. It then requests, via `webbrowser.open_new_tab()`, that your default browser open that page.
+Given a list of fully-qualified filenames for files containing the search terms, the main program in [search.py](https://github.com/USFCA-MSDS/msds692/tree/master/hw/code/search/search.py) uses function `results()` to get a string containing HTML, which `search.py` writes to file `/tmp/results.html`. It then requests, via `webbrowser.open_new_tab()`, that your default browser open that page.
 
 ### HTML output
 
@@ -61,13 +61,13 @@ You can create whatever fancy HTML you want to show search results, but here is 
     <body>
     <h2>Search results for <b>ronald reagan</b> in 164 files</h2>
     
-        <p><a href="file:///Users/parrt/github/msds692/data/slate/51/ArticleIP_38825.txt">/Users/parrt/github/msds692/data/slate/51/ArticleIP_38825.txt</a><br>
+        <p><a href="file:///Users/USFCA-MSDS/github/msds692/data/slate/51/ArticleIP_38825.txt">/Users/USFCA-MSDS/github/msds692/data/slate/51/ArticleIP_38825.txt</a><br>
          such barry goldwater and <b>ronald</b> <b>reagan</b> gradually that conservatism has<br><br>
         
-        <p><a href="file:///Users/parrt/github/msds692/data/slate/50/ArticleIP_27730.txt">/Users/parrt/github/msds692/data/slate/50/ArticleIP_27730.txt</a><br>
+        <p><a href="file:///Users/USFCA-MSDS/github/msds692/data/slate/50/ArticleIP_27730.txt">/Users/USFCA-MSDS/github/msds692/data/slate/50/ArticleIP_27730.txt</a><br>
          united states should pull out unilaterally when <b>ronald</b> <b>reagan</b> saw that had<br><br>
         
-        <p><a href="file:///Users/parrt/github/msds692/data/slate/20/Article247_4335.txt">/Users/parrt/github/msds692/data/slate/20/Article247_4335.txt</a><br>
+        <p><a href="file:///Users/USFCA-MSDS/github/msds692/data/slate/20/Article247_4335.txt">/Users/USFCA-MSDS/github/msds692/data/slate/20/Article247_4335.txt</a><br>
          will lead any good when <b>ronald</b> <b>reagan</b> introduced similar device his<br><br>  
 ...    
 </body>
@@ -77,7 +77,7 @@ You can create whatever fancy HTML you want to show search results, but here is 
 Notice that the links are URLs just like you see going to websites except they refer to a file on the local disk instead of another machine because of the `file://` prefix.  For example, if my data is in the `github/msds692/data` subdirectory of my home directory, we see URLs like:
  
 ```
-file:///Users/parrt/github/msds692/data/slate/10/Article247_3363.txt
+file:///Users/USFCA-MSDS/github/msds692/data/slate/10/Article247_3363.txt
 ```
 
 (My data is stored in a slightly different spot than yours will be.)
@@ -132,7 +132,7 @@ These functions will use expressions like `index[w]`, where `index` is a `dict`,
 
 ### Creating an index using your own hashtable
 
-For more implementation details, see the [lecture notes](https://github.com/parrt/msds692/blob/master/notes/hashtable.pdf) and [notebook associated with hash tables](https://github.com/parrt/msds692/blob/master/notes/hashtable.ipynb).
+For more implementation details, see the [lecture notes](https://github.com/USFCA-MSDS/msds692/blob/master/notes/hashtable.pdf) and [notebook associated with hash tables](https://github.com/USFCA-MSDS/msds692/blob/master/notes/hashtable.ipynb).
 
 We know that a linear search of a list of associations is slow because it requires a search through all associations, in the worst case. But how can we find something without looking through all the items?
 
@@ -271,9 +271,9 @@ To create `mytable_search.py`, copy `index_search.py` and modify the code that u
 
 ## Getting started
 
-Please go to the [Search starterkit](https://github.com/parrt/msds692/tree/master/hw/code/search) and grab all the python files.  Store these in your repo `search-`*userid*, wherever you store that directory.
+Please go to the [Search starterkit](https://github.com/USFCA-MSDS/msds692/tree/master/hw/code/search) and grab all the python files.  Store these in your repo `search-`*userid*, wherever you store that directory.
 
-Store the [Slate](https://github.com/parrt/msds692/blob/master/data/slate.7z) and [Berlitz](https://github.com/parrt/msds692/blob/master/data/berlitz1.7z) data sets outside of your repo so that you are not tempted to add that data to the repository. Perhaps you can make a general data directory for use in lots of classes such as `~/data` or just for this class `~/msds692/data`. You will need the `7z` compression utility to uncompress those things.
+Store the [Slate](https://github.com/USFCA-MSDS/msds692/blob/master/data/slate.7z) and [Berlitz](https://github.com/USFCA-MSDS/msds692/blob/master/data/berlitz1.7z) data sets outside of your repo so that you are not tempted to add that data to the repository. Perhaps you can make a general data directory for use in lots of classes such as `~/data` or just for this class `~/msds692/data`. You will need the `7z` compression utility to uncompress those things.
 
 I recommend that you start by getting the simple linear search to work, which involves computing HTML and all of the basic machinery for extracting words from file content. So start by fleshing out `words.py` and `linear_search.py`.  You can use the unit tests in the test python files, although the tests will fail for the indexed-based searches until you get those implemented. 
 
@@ -285,7 +285,7 @@ You must complete and add these to root of your `search-`*userid* repository:
 * index_search.py
 * linear_search.py
 * myhtable_search.py (**no `dict` objects allowed in this file!**)
-* words.py (make sure you are using [get_text()](https://github.com/parrt/msds692/blob/master/hw/code/search/words.py#L10) and words() functions in your code.)
+* words.py (make sure you are using [get_text()](https://github.com/USFCA-MSDS/msds692/blob/master/hw/code/search/words.py#L10) and words() functions in your code.)
 
 If you use jinja2 templates stored on the disk, make sure those are part of the repository as well.
 
