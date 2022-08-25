@@ -20,7 +20,7 @@ You will do your work in `recommender-`*userid*.
 
 ### Article word-vector centroids
 
-Those of you who were not in the [MSDS501 computational boot camp](https://github.com/parrt/msds501) should read the project description [Word similarity and relationships](https://github.com/parrt/msds501/blob/master/projects/wordsim.md). The document explains word vectors enough to complete this project.
+Those of you who were not in the [MSDS501 computational boot camp](https://github.com/USFCA-MSDS/msds501) should read the project description [Word similarity and relationships](https://github.com/USFCA-MSDS/msds501/blob/master/projects/wordsim.md). The document explains word vectors enough to complete this project.
 
 In a nutshell, each word has a vector of, say, 300 floating-point numbers that somehow capture the meaning of the word, at least as it relates to other words within a corpus. These vectors are derived from a neural network that learns to map a word to an output vector such that neighboring words in some large corpus are close in 300-space. ("The main intuition underlying the model is the simple observation that ratios of word-word co-occurrence probabilities have the potential for encoding some form of meaning." see [GloVe project](https://nlp.stanford.edu/projects/glove/).)
 
@@ -178,8 +178,8 @@ beast:master:~/courses/msds692-private/hw/recommender $ gunicorn -D --threads 1 
 
 beast:master:~/courses/msds692-private/hw/recommender $ ps aux | grep gunicorn
 parrt            71972   0.0  0.0  4267768   1028 s003  S+   11:01AM   0:00.00 grep gunicorn
-parrt            71743   0.0  1.1  4657032 354216   ??  S    11:01AM   0:06.19 /Users/parrt/anaconda3/bin/python /Users/parrt/anaconda3/bin/gunicorn -D --threads 1 -b 0.0.0.0:5000 --access-logfile server.log --timeout 60 server:app /Users/parrt/data/glove.6B/glove.6B.50d.txt /Users/parrt/github/msds692/data/bbc
-parrt            71737   0.0  0.0  4310344  10396   ??  S    11:01AM   0:00.02 /Users/parrt/anaconda3/bin/python /Users/parrt/anaconda3/bin/gunicorn -D --threads 1 -b 0.0.0.0:5000 --access-logfile server.log --timeout 60 server:app /Users/parrt/data/glove.6B/glove.6B.50d.txt /Users/parrt/github/msds692/data/bbc
+parrt            71743   0.0  1.1  4657032 354216   ??  S    11:01AM   0:06.19 /Users/USFCA-MSDS/anaconda3/bin/python /Users/USFCA-MSDS/anaconda3/bin/gunicorn -D --threads 1 -b 0.0.0.0:5000 --access-logfile server.log --timeout 60 server:app /Users/USFCA-MSDS/data/glove.6B/glove.6B.50d.txt /Users/USFCA-MSDS/github/msds692/data/bbc
+parrt            71737   0.0  0.0  4310344  10396   ??  S    11:01AM   0:00.02 /Users/USFCA-MSDS/anaconda3/bin/python /Users/USFCA-MSDS/anaconda3/bin/gunicorn -D --threads 1 -b 0.0.0.0:5000 --access-logfile server.log --timeout 60 server:app /Users/USFCA-MSDS/data/glove.6B/glove.6B.50d.txt /Users/USFCA-MSDS/github/msds692/data/bbc
 
 beast:master:~/courses/msds692-private/hw/recommender $ kill -9 71737
 
@@ -222,7 +222,7 @@ Anyway, the upshot is you don't have to worry about these attacks but it's somet
 
 ## Getting started
 
-Download the [starterkit](https://github.com/parrt/msds692/tree/master/hw/code/recommender), which has the following files and structure:
+Download the [starterkit](https://github.com/USFCA-MSDS/msds692/tree/master/hw/code/recommender), which has the following files and structure:
 
 ```
 ├── doc2vec.py
@@ -326,7 +326,7 @@ Note that you must give fully-qualified pathnames to the word vectors and the ro
 
 ## Evaluation
 
-To evaluate your projects, the grader and I will run the [test_server.py](https://github.com/parrt/msds692/blob/master/hw/code/recommender/test_server.py) script, from your repo root directory, that automatically pulls your article list page and a selection of article pages to check that your recommendations match our solution.
+To evaluate your projects, the grader and I will run the [test_server.py](https://github.com/USFCA-MSDS/msds692/blob/master/hw/code/recommender/test_server.py) script, from your repo root directory, that automatically pulls your article list page and a selection of article pages to check that your recommendations match our solution.
 
 **Without the IP.txt file at the root of your repository, we cannot test your server and you get a zero!**  Our script reads your IP.txt file with:
 
@@ -337,7 +337,7 @@ with open("IP.txt") as f:
 
 The starterkit has `localhost:5000` in it so you can test locally before deploying to your server. You must replace `localhost` with the **public** IP address of your server.
 
-It also reads some pickled "truth" data structures that encode the articles from my solution's web server. That data was generated with [pickle_truth.py](https://github.com/parrt/msds692/blob/master/hw/code/recommender/pickle_truth.py).
+It also reads some pickled "truth" data structures that encode the articles from my solution's web server. That data was generated with [pickle_truth.py](https://github.com/USFCA-MSDS/msds692/blob/master/hw/code/recommender/pickle_truth.py).
 
 Here is a sample test run:
 
@@ -345,9 +345,9 @@ Here is a sample test run:
 $ cd ~/grading/MSDS692/recommender-parrt
 $ python -m pytest -v test_server.py
 ============================================ test session starts =============================================
-platform darwin -- Python 2.7.12, pytest-2.9.2, py-1.4.31, pluggy-0.3.1 -- /Users/parrt/anaconda2/bin/python
+platform darwin -- Python 2.7.12, pytest-2.9.2, py-1.4.31, pluggy-0.3.1 -- /Users/USFCA-MSDS/anaconda2/bin/python
 cachedir: .cache
-rootdir: /Users/parrt/grading/MSDS692/recommender-parrt, inifile: 
+rootdir: /Users/USFCA-MSDS/grading/MSDS692/recommender-parrt, inifile: 
 collected 2 items 
 
 test_server.py::test_links PASSED
