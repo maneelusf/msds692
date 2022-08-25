@@ -46,7 +46,7 @@ $ python xml2csv.py data.xml | python csv2json.py > data.json
 
 It's also good idea to learn how to generate HTML for display in a browser, so we will create a CSV to HTML translator as well.
 
-You will work in git repo pipeline-*userid*.  Some [starter kit files](https://github.com/parrt/msds692/blob/master/hw/code/pipeline) are available.
+You will work in git repo pipeline-*userid*.  Some [starter kit files](https://github.com/USFCA-MSDS/msds692/blob/master/hw/code/pipeline) are available.
 
 ## Description
 
@@ -58,13 +58,13 @@ Grab Apple's 35 year stock history using this URL
 http://ichart.finance.yahoo.com/table.csv?s=AAPL
 ```
 
-*This API was taken down in 2017 so just grab [the file](https://github.com/parrt/msds692/blob/master/hw/code/pipeline/data/AAPL.csv) from the data dir of the course repo*. Or, register for an API key at [Quandl](https://blog.quandl.com/api-for-stock-data) and then use `https://www.quandl.com/api/v3/datasets/EOD/AAPL.csv?api_key=YOURAPIKEY`.
+*This API was taken down in 2017 so just grab [the file](https://github.com/USFCA-MSDS/msds692/blob/master/hw/code/pipeline/data/AAPL.csv) from the data dir of the course repo*. Or, register for an API key at [Quandl](https://blog.quandl.com/api-for-stock-data) and then use `https://www.quandl.com/api/v3/datasets/EOD/AAPL.csv?api_key=YOURAPIKEY`.
 
 The data is a CSV file with 8996 lines, which we can discover easily with `wc`:
  
 ```bash
 $ wc ~/github/msds692/data/AAPL.csv
-    8996    8997  583817 /Users/parrt/github/msds692/data/AAPL.csv
+    8996    8997  583817 /Users/USFCA-MSDS/github/msds692/data/AAPL.csv
 ```
 
 The first thing to notice is that there is a header row that describes the data in the various columns.
@@ -89,7 +89,7 @@ when,a,b
 2016-08-13,3.99003,4.3
 ```
 
-To parse that, we read the file and convert it to a list of lines and then we split each line on commas. That gives us a list of lists. Of course, the first line of the file is special; it is the header row. Let's get this first task out of the way then by completing the following code in [mycsv.py](https://github.com/parrt/msds692/blob/master/hw/code/pipeline/mycsv.py) (a library to be used by your other files):
+To parse that, we read the file and convert it to a list of lines and then we split each line on commas. That gives us a list of lists. Of course, the first line of the file is special; it is the header row. Let's get this first task out of the way then by completing the following code in [mycsv.py](https://github.com/USFCA-MSDS/msds692/blob/master/hw/code/pipeline/mycsv.py) (a library to be used by your other files):
 
 ```python
 import sys
@@ -332,7 +332,7 @@ In your repo root directory (no subdirectories), please add:
 * json2csv.py
 * xml2csv.py
 
-You shouldn't add data to the repo. We'll test it using [sample input](https://github.com/parrt/msds692/blob/master/hw/code/pipeline/data) and compare to [expected output](https://github.com/parrt/msds692/blob/master/hw/code/pipeline/output).
+You shouldn't add data to the repo. We'll test it using [sample input](https://github.com/USFCA-MSDS/msds692/blob/master/hw/code/pipeline/data) and compare to [expected output](https://github.com/USFCA-MSDS/msds692/blob/master/hw/code/pipeline/output).
 
 Please be aware that the point of this exercise is to teach you about generating structured text.  There are plenty of libraries out there already that will generate data in any format we want. Please don't call these output generation functions unless directed to in the notes above. Otherwise you are not actually solving the problem but rather simply calling somebody else's solution. Learning a language is a matter of learning to speak it and it defeats the purpose of this exercise if you call someone else's JSON or XML dumping routine.
 
@@ -340,9 +340,9 @@ Please be aware that the point of this exercise is to teach you about generating
 
 Each of the five translators will be tested automatically. Any programming errors or invalid output will result in a zero for that particular test. Each of the translators gets 20% of the score.  Note, however, that if your CSV `readcsv()` function doesn't work, your `csv*.py` scripts will not work either so make sure you get that working correctly first.
 
-You will find some [sample input](https://github.com/parrt/msds692/blob/master/hw/code/pipeline/data) and [expected output](https://github.com/parrt/msds692/blob/master/hw/code/pipeline/output) in this course repository.
+You will find some [sample input](https://github.com/USFCA-MSDS/msds692/blob/master/hw/code/pipeline/data) and [expected output](https://github.com/USFCA-MSDS/msds692/blob/master/hw/code/pipeline/output) in this course repository.
 
-I provide a [test shell script](https://github.com/parrt/msds692/blob/master/hw/code/pipeline/testdata.sh) that you can use to test your data format generation and conversion.  Your project will be graded by running the AAPL, TSLA, and simple t data files:
+I provide a [test shell script](https://github.com/USFCA-MSDS/msds692/blob/master/hw/code/pipeline/testdata.sh) that you can use to test your data format generation and conversion.  Your project will be graded by running the AAPL, TSLA, and simple t data files:
 
 ```bash
 $ bash ./testdata.sh data output # execute with bash not zsh!
@@ -372,7 +372,7 @@ Test t
    json2csv|csv2json: output/t.json and /tmp/t.json same
 ```
 
-When testing, the `data` dir should have files AAPL.csv, TSLA.csv, and t.csv. When testing, the `output` directory is the set of known good output downloaded from the starter kit: [expected output](https://github.com/parrt/msds692/tree/master/hw/code/pipeline/output). The script tests things in this manner:
+When testing, the `data` dir should have files AAPL.csv, TSLA.csv, and t.csv. When testing, the `output` directory is the set of known good output downloaded from the starter kit: [expected output](https://github.com/USFCA-MSDS/msds692/tree/master/hw/code/pipeline/output). The script tests things in this manner:
 
 ```bash
 python csv2html.py data/t.csv > /tmp/csv2html-t.html
