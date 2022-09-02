@@ -5,6 +5,12 @@ import string
 
 def filelist(root):
     """Return a fully-qualified list of filenames under root directory"""
+    filelist = []
+    for root, dirs, files in os.walk(root):
+        for file in files:
+            # append the file name to the list
+            filelist.append(os.path.join(root, file))
+    return filelist
 
 
 def get_text(fileName):
@@ -40,6 +46,36 @@ def results(docs, terms):
     that have at least one of the search terms.
     Return at most 100 results.  Arg terms is a list of string terms.
     """
+    def checklist(terms,sentence):
+        a = False
+        for term in terms:
+            if term in sentence.lower():
+                a = True
+                break
+        return a
+    html_strings = ''
+    for doc in docs:
+        with open(doc,'r') as f:
+            file_list = f.readlines()
+            for sentence_number,sentence in enumerate(file_list):
+                if checklist(terms,sentence) == True:
+                    break
+            if sentence_number == 0:
+                html_string = file_list[0].lower() + file_list[1].lower()
+            else:
+                html_string = file_list[sentence_number - 1].lower() + file_list[sentence_number].lower()
+            for term in terms:
+                html_string = html_string.replace(term, '<b>{}</b>'.format(term))
+                html_string = '''<p><a href="{}">{}</a><br>
+         {}<br><br>'''.format(doc,doc,html_string)
+            html_strings = html_strings + html_string
+    main_string = '''<html>
+    <body>
+    <h2>Search results for <b>{}</b> in {} files</h2>{}   
+</body>
+</html>'''.format(' '.join(terms),len(docs),html_strings)
+    return main_string
+
 
 
 def filenames(docs):
