@@ -12,6 +12,18 @@ def create_index(files):
     For each word w in file i, add i to the set of document IDs containing w
     Return a dict object mapping a word to a set of doc IDs.
     """
+    dictionary = {}
+    for file_number,file in enumerate(files):
+        result = set(words(get_text(file)))
+        for word in result:
+            if word in dictionary.keys():
+                dictionary[word].extend([file_number])
+            else:
+                dictionary[word] = [file_number]
+    return dictionary
+        #result.extend(words(get_text(file)))
+
+
 
 
 def index_search(files, index, terms):
@@ -22,3 +34,10 @@ def index_search(files, index, terms):
     You can only use the index to find matching files; you cannot open the files
     and look inside.
     """
+    file_list = []
+    for term in terms:
+        file_list.append(set(index[term]))
+    file_list = set.intersection(*file_list)
+    return [files[file] for file in list(file_list)]
+
+
