@@ -44,5 +44,3 @@ def index_search(files, index, terms):
     else:
         a = None
     return a
-
-
