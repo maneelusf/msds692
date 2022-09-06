@@ -5,6 +5,7 @@ Each bucket is a list of (key,value) tuples
 
 def htable(nbuckets):
     """Return a list of nbuckets lists"""
+    return [[] for x in range(0,nbuckets)]
 
 
 def hashcode(o):
@@ -13,6 +14,15 @@ def hashcode(o):
     For integers, just return the integer value.
     For strings, perform operation h = h*31 + ord(c) for all characters in the string
     """
+    if type(o) == int:
+        return o
+    else:
+        h = 0
+        for char in o:
+            h = h*31 + ord(char)
+        return h
+
+
 
 
 def bucket_indexof(table, key):
@@ -34,7 +44,15 @@ def htable_put(table, key, value):
     Make sure that you are only adding (key,value) associations to the buckets.
     The type(value) can be anything. Could be a set, list, number, string, anything!
     """
-
+    bucket_number = hashcode(key)%len(table)
+    a = 0
+    for i in range(0,len(table[bucket_number])):
+        if key == table[bucket_number][i][0]:
+            table[bucket_number][i][1].add(value)
+            a = 1
+            break
+    if a == 0:
+        table[bucket_number].append([key,{value}])
 
 def htable_get(table, key):
     """
@@ -43,6 +61,11 @@ def htable_get(table, key):
     association with the key. Return the value (not the key and not
     the association!). Return None if key not found.
     """
+    bucket_number = hashcode(key)%len(table)
+    for i in range(0,len(table[bucket_number])):
+        if key == table[bucket_number][i][0]:
+            return table[bucket_number][i][1]
+    return None
 
 
 def htable_buckets_str(table):
@@ -65,3 +88,4 @@ def htable_str(table):
     insertion order within each bucket. The insertion order is
     guaranteed when you append to the buckets in htable_put().
     """
+
