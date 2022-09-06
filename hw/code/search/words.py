@@ -66,9 +66,8 @@ def results(docs, terms):
                 html_string = file_list[sentence_number - 1].lower() + file_list[sentence_number].lower()
             for term in terms:
                 html_string = html_string.replace(term, '<b>{}</b>'.format(term))
-                html_string = '''<p><a href="{}">{}</a><br>
-         {}<br><br>'''.format(doc,doc,html_string)
-            html_strings = html_strings + html_string
+                html_string = '''<br>{}<br><br>'''.format(html_string)
+            html_strings = html_strings + '''<p><a href="{}">{}</a>"'''.format(doc,doc) + html_string
     main_string = '''<html>
     <body>
     <h2>Search results for <b>{}</b> in {} files</h2>{}   
