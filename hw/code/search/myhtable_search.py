@@ -17,7 +17,14 @@ def myhtable_create_index(files):
     for file_number,file in enumerate(files):
         result = set(words(get_text(file)))
         for word in result:
-            htable_put(table, word, file_number)
+            file_name_list = htable_get(table, word)
+
+            if file_name_list!=None:
+                if file_name_list!= file_name_list.union({file_number}):
+                    htable_put(table, word, file_name_list.union({file_number}))
+            else:
+                htable_put(table,word,{file_number})
+
     return table
 
 
@@ -32,7 +39,12 @@ def myhtable_index_search(files, index, terms):
         file_name_list = htable_get(index, term)
         if file_name_list!=None:
             file_list.append(file_name_list)
-    file_list = set.intersection(*file_list)
-    return [files[file] for file in list(file_list)]
+    if file_list != []:
+        file_list = set.intersection(*file_list)
+        a = [files[file] for file in list(file_list)]
+    else:
+        a = []
+
+    return a
 
 

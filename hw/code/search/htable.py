@@ -48,11 +48,11 @@ def htable_put(table, key, value):
     a = 0
     for i in range(0,len(table[bucket_number])):
         if key == table[bucket_number][i][0]:
-            table[bucket_number][i][1].add(value)
+            table[bucket_number][i][1] = value
             a = 1
             break
     if a == 0:
-        table[bucket_number].append([key,{value}])
+        table[bucket_number].append([key,value])
 
 def htable_get(table, key):
     """
@@ -79,6 +79,21 @@ def htable_buckets_str(table):
         0004->
     where parrt:99 indicates an association of (parrt,99) in bucket 3.
     """
+    string_main = ''
+    for x,y in enumerate(table):
+        if y == []:
+            index_string = '0'*(4 - len(str(x))) + str(x)
+            string_main = string_main + '{}->'.format(index_string) + '\n'
+        else:
+            index_string = '0' * (4 - len(str(x))) + str(x)
+            string_main = string_main + index_string + '->{}'.format(','.join(['{}:{}'.format(z[0],z[1]) for z in y if\
+                                                                               len(z) == 2]))\
+            + '\n'
+    string_main = string_main.replace(' ', '')
+    string_main = string_main.replace(',', ', ')
+    return string_main
+
+
 
 
 def htable_str(table):
@@ -88,4 +103,16 @@ def htable_str(table):
     insertion order within each bucket. The insertion order is
     guaranteed when you append to the buckets in htable_put().
     """
+    string_main = []
+    for x in table:
+        if x == []:
+            pass
+        else:
+            string_main.append(','.join(['{}:{}'.format(y[0],y[1]) for y in x if len(y) == 2]))
+    string  = '{' + ','.join(string_main) + '}'
+    string = string.replace(' ','')
+    string = string.replace(',',', ')
+    return string
 
+
+#~/Downloads/"Data Acquisition"/msds692/data/berlitz

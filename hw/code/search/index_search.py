@@ -36,8 +36,13 @@ def index_search(files, index, terms):
     """
     file_list = []
     for term in terms:
-        file_list.append(set(index[term]))
-    file_list = set.intersection(*file_list)
-    return [files[file] for file in list(file_list)]
+        if term in index.keys():
+            file_list.append(set(index[term]))
+    if len(file_list)>0:
+        file_list = set.intersection(*file_list)
+        a = [files[file] for file in list(file_list)]
+    else:
+        a = None
+    return a
 
 
