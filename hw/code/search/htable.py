@@ -48,11 +48,11 @@ def htable_put(table, key, value):
     a = 0
     for i in range(0,len(table[bucket_number])):
         if key == table[bucket_number][i][0]:
-            table[bucket_number][i][1] = value
+            table[bucket_number][i] = (key,value)
             a = 1
             break
     if a == 0:
-        table[bucket_number].append([key,value])
+        table[bucket_number].append((key,value))
 
 def htable_get(table, key):
     """
