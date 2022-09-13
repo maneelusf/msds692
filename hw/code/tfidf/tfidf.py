@@ -14,7 +14,21 @@ def gettext(xmltext) -> str:
     """
     Parse xmltext and return the text from <title> and <text> tags
     """
-    xmltext = xmltext.encode('ascii', 'ignore') # ensure there are no weird char
+
+
+    # ensure there are no weird char
+    xmltext = xmltext.encode('ascii', 'ignore')
+    tree = ET.parse(xmltext)
+    title_string = []
+    text_string = []
+    for i in tree.iterfind('title'):
+        title_string.append(i.text)
+    for i in tree.iterfind('.//text/*'):
+        text_string.append(i.text)
+    title_string = ' '.join(title_string)
+    text_string = ' '.join(text_string)
+    final_string = title_string + ' ' + text_string
+    return final_string
 
 
 def tokenize(text) -> list:
@@ -27,6 +41,8 @@ def tokenize(text) -> list:
     text = re.sub('[' + string.punctuation + '0-9\\r\\t\\n]', ' ', text)
     tokens = nltk.word_tokenize(text)
     tokens = [w for w in tokens if len(w) > 2]  # ignore a, an, to, at, be, ...
+    tokens = [w for w in tokens if w not in ENGLISH_STOP_WORDS]
+    return tokens
     ...
 
 
@@ -35,6 +51,9 @@ def stemwords(words) -> list:
     Given a list of tokens/words, return a new list with each word
     stemmed using a PorterStemmer.
     """
+    stemmer = PorterStemmer()
+    words = [stemmer.stem(plural) for plural in words]
+    return words
 
 
 def tokenizer(text) -> list:
