@@ -18,7 +18,7 @@ def gettext(xmltext) -> str:
 
     # ensure there are no weird char
     xmltext = xmltext.encode('ascii', 'ignore')
-    tree = ET.parse(xmltext)
+    tree = ET.fromstring(xmltext)
     title_string = []
     text_string = []
     for i in tree.iterfind('title'):
@@ -89,4 +89,11 @@ def load_corpus(zipfilename:str) -> dict:
     as the keys in the dictionary. The values in the dictionary are the
     raw XML text from the various files.
     """
+    with zipfile.ZipFile(zipfilename, 'r') as f:
+        names = f.namelist()
+    dict1 = {}
+    for name in names[1:]:
+        with open(os.path.join(os.path.dirname(zipfilename),name)) as f:
+            dict1[name] = f.read()
+    return dict1
 

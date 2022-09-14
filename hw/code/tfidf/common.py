@@ -4,7 +4,9 @@ from collections import Counter
 
 
 filename = sys.argv[1]
-xmltext = gettext(filename)
+with open(filename,'r') as f:
+    xmlstring = f.read()
+xmltext = gettext(xmlstring)
 tokens = tokenize(xmltext)
 tokens = stemwords(tokens)
 tokens = Counter(tokens).most_common(10)
