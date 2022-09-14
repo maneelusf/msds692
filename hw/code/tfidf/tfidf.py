@@ -94,8 +94,9 @@ def summarize(tfidf:TfidfVectorizer, text:str, n:int):
     list1 = []
     for i in range(0,word_length):
         if X[:,i][0] >= 0.09:
-            list1.append((tfidf.get_feature_names()[i],round(X[:,i][0],3)))
-    list1.sort(key = lambda x: x[1],reverse = True)
+            list1.append((tfidf.get_feature_names()[i],X[:,i][0]))
+    list1.sort(key = lambda x: (x[1],x[0]),reverse = True)
+    #import pdb;pdb.set_trace()
     return list1[:n]
 
 def load_corpus(zipfilename:str) -> dict:

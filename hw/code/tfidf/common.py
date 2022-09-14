@@ -11,4 +11,4 @@ tokens = tokenize(xmltext)
 tokens = stemwords(tokens)
 tokens = Counter(tokens).most_common(10)
 for token in tokens:
-    print(token[0],token[1])
+    print(token[0],round(token[1],3))
