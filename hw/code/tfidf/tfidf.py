@@ -70,6 +70,18 @@ def compute_tfidf(corpus:dict) -> TfidfVectorizer:
     mapping file name to xml text.
     """
 
+    documents = list(corpus.values())
+    tfidf = TfidfVectorizer(input='content',
+                            analyzer='word',
+                            preprocessor=gettext,
+                            tokenizer=tokenizer,
+                            stop_words='english', # even more stop words
+                            decode_error = 'ignore')
+    tfidf = tfidf.fit(documents)
+    return tfidf
+
+
+
 
 def summarize(tfidf:TfidfVectorizer, text:str, n:int):
     """
@@ -77,7 +89,14 @@ def summarize(tfidf:TfidfVectorizer, text:str, n:int):
     up to n (word,score) pairs in a list. Discard any terms with
     scores < 0.09. Sort the (word,score) pairs by TFIDF score in reverse order.
     """
-
+    X = tfidf.transform([text]).toarray()
+    word_length = X.shape[1]
+    list1 = []
+    for i in range(0,word_length):
+        if X[:,i][0] >= 0.09:
+            list1.append((tfidf.get_feature_names()[i],round(X[:,i][0],3)))
+    list1.sort(key = lambda x: x[1],reverse = True)
+    return list1[:n]
 
 def load_corpus(zipfilename:str) -> dict:
     """
@@ -94,6 +113,6 @@ def load_corpus(zipfilename:str) -> dict:
     dict1 = {}
     for name in names[1:]:
         with open(os.path.join(os.path.dirname(zipfilename),name)) as f:
-            dict1[name] = f.read()
+            dict1[name.split('/')[1]] = f.read()
     return dict1
 

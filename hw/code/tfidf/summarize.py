@@ -1,10 +1,14 @@
 from tfidf import *
 
-
 zipfilename = sys.argv[1]
 summarizefile = sys.argv[2]
 
 ziplistnames = load_corpus(zipfilename)
+tfidf = compute_tfidf(ziplistnames)
+summarized_tokens = summarize(tfidf = tfidf,text = ziplistnames[summarizefile],n = 20)
+for token in summarized_tokens:
+    print(token[0],token[1])
+
 
 
 # tfidf = TfidfVectorizer(input='content',
