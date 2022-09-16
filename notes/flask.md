@@ -122,7 +122,7 @@ Another example is creating a function that adds two numbers:
 @app.route('/add/<int:n1>/<int:n2>/')
 def add(n1, n2):
     return '<h1>{}</h1>'.format(n1 + n2)
-    ```
+```
 
 
 
