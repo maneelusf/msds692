@@ -106,15 +106,25 @@ We can also use part of the URL as kind of a parameter. Make the following chang
 ```python
 @app.route("/hello/<name>")
 def hello(name):
-    return "Hello %s!\n" % name
+    return f"Hello {name}"
 ```
 
-Restart your server and visit URL `http://127.0.0.1:5000/hello/parrt` should give output `Hello parrt!` in your browser:
+
+Restart your server and visit URL `http://127.0.0.1:5000/hello/James` should give output `Hello parrt!` in your browser:
 
 ```bash
-$ curl http://127.0.0.1:5000/hello/parrt
-Hello parrt!
+$ curl http://127.0.0.1:5000/hello/James
+Hello James!
 ```
+
+Another example is creating a function that adds two numbers:
+```python
+@app.route('/add/<int:n1>/<int:n2>/')
+def add(n1, n2):
+    return '<h1>{}</h1>'.format(n1 + n2)
+```
+
+
 
 **Exercise**: Use `curl -v` with URL `http://127.0.0.1:5000/hello`. Look at the
  `GET` line again; how has it changed?
@@ -192,3 +202,51 @@ def foo():
 **Exercise**: Create a server that responds to URL `/data` by sending back the data stored at URL `https://raw.githubusercontent.com/parrt/msds621/master/data/cars.csv`. Hint: use `requests` library to go get that data.
 
 **Exercise**:  Do the same thing except now use pandas to read the URL into a data frame and then use `to_html()` to create HTML. Send that HTML back from the response to URL `/data`.
+
+# Using templates
+
+In Flask, you can use the Jinja templating language to render HTML templates. A template is a file that can contain both fixed and dynamic content. When a user requests something from your application (such as an index page, or a login page), Jinja allows you to respond with an HTML. 
+
+
+Next, you’ll have to create the index.html template file in a directory called templates inside your flask_app directory. Flask looks for templates in the templates directory, which is called templates, so the name is important. Make sure you’re inside the flask_app directory and run the following command to create the templates directory.
+
+Next, open a file called index.html inside the templates directory for editing. The name index.html here is not a standard required name; you can call it home.html or homepage.html or anything else if you want:
+
+
+Add the following HTML code inside the index.html file:
+
+
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FlaskApp</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+    <h2>Welcome to FlaskApp!</h2>
+</body>
+</html>
+```
+
+Here, you set a title, added a Hello World! message as an H1 heading, and created a Welcome to FlaskApp! message as an H2 heading.
+
+Save and close the file.
+
+
+Now your python script should look like this :
+
+```python
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def hello():
+    return render_template('index.html')
+```
+
+
