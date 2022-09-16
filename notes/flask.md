@@ -106,15 +106,25 @@ We can also use part of the URL as kind of a parameter. Make the following chang
 ```python
 @app.route("/hello/<name>")
 def hello(name):
-    return "Hello %s!\n" % name
+    return f"Hello {name}"
 ```
 
-Restart your server and visit URL `http://127.0.0.1:5000/hello/parrt` should give output `Hello parrt!` in your browser:
+
+Restart your server and visit URL `http://127.0.0.1:5000/hello/James` should give output `Hello parrt!` in your browser:
 
 ```bash
-$ curl http://127.0.0.1:5000/hello/parrt
-Hello parrt!
+$ curl http://127.0.0.1:5000/hello/James
+Hello James!
 ```
+
+Another example is creating a function that adds two numbers:
+```python
+@app.route('/add/<int:n1>/<int:n2>/')
+def add(n1, n2):
+    return '<h1>{}</h1>'.format(n1 + n2)
+    ```
+
+
 
 **Exercise**: Use `curl -v` with URL `http://127.0.0.1:5000/hello`. Look at the
  `GET` line again; how has it changed?
