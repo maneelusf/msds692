@@ -9,6 +9,7 @@ import string
 from sklearn.feature_extraction.text import TfidfVectorizer
 import zipfile
 import os
+import numpy as np
 
 def gettext(xmltext) -> str:
     """
@@ -90,13 +91,10 @@ def summarize(tfidf:TfidfVectorizer, text:str, n:int):
     scores < 0.09. Sort the (word,score) pairs by TFIDF score in reverse order.
     """
     X = tfidf.transform([text]).toarray()
-    word_length = X.shape[1]
-    list1 = []
-    for i in range(0,word_length):
-        if X[:,i][0] >= 0.09:
-            list1.append((tfidf.get_feature_names()[i],X[:,i][0]))
+    indexes = np.nonzero(X)[1]
+
+    list1 = [(tfidf.get_feature_names_out()[i],X[:,i][0]) for i in indexes if X[:,i][0]>=0.09]
     list1.sort(key = lambda x: (x[1],x[0]),reverse = True)
-    #import pdb;pdb.set_trace()
     return list1[:n]
 
 def load_corpus(zipfilename:str) -> dict:
@@ -109,11 +107,13 @@ def load_corpus(zipfilename:str) -> dict:
     as the keys in the dictionary. The values in the dictionary are the
     raw XML text from the various files.
     """
+    dict1 = {}
     with zipfile.ZipFile(zipfilename, 'r') as f:
         names = f.namelist()
-    dict1 = {}
-    for name in names[1:]:
-        with open(os.path.join(os.path.dirname(zipfilename),name)) as f:
-            dict1[name.split('/')[1]] = f.read()
+        for name in names[1:]:
+            dict1[name.split('/')[1]] = f.read(name)
     return dict1
+
+
+
 

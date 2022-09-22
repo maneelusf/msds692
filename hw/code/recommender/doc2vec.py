@@ -63,6 +63,11 @@ def load_glove(filename):
     and the remaining elements represent factor components. The length of the vector
     should not matter; read vectors of any length.
     """
+    dict1 = {}
+    with open(filename) as f:
+        for line in f.readlines():
+            dict1[line.split()[0]] = np.array(line.split()[1:])
+    return dict1
 
 
 def filelist(root):
@@ -96,6 +101,12 @@ def words(text):
     Lowercase all words
     Remove English stop words
     """
+    text = text.lower()
+    text = re.sub('[' + string.punctuation + '0-9\\r\\t\\n]', ' ', text).split()
+    text = [w for w in text if len(w) > 2]  # ignore a, an, to, at, be, ...
+    text = [w for w in text if w not in ENGLISH_STOP_WORDS]
+    return text
+    
 
 
 def load_articles(articles_dirname, gloves):
@@ -112,6 +123,18 @@ def load_articles(articles_dirname, gloves):
 
     When computing the vector for each document, use just the text, not the text and title.
     """
+    list1 = []
+    files = filelist(articles_dirname)
+    for file in files:
+        text = get_text(file).split('\n')
+        ##.split('\n')
+        title = text[0]
+        text_title = ''.join(text[1:])
+        
+        
+        list1.append([file,text[0],text_title,doc2vec(words(text_title),gloves)])
+    
+    return list1
 
 
 def doc2vec(text, gloves):
@@ -120,6 +143,10 @@ def doc2vec(text, gloves):
     for each word and then divide by the number of words. Ignore words
     not in gloves.
     """
+    key_gloves = gloves.keys() 
+    vector = [gloves[key] for key in text if key in key_gloves]
+    return np.array(vector).astype(float).mean(axis = 0)
+    
 
 
 def distances(article, articles):
@@ -128,6 +155,12 @@ def distances(article, articles):
     a list of (distance, a) tuples for all a in articles. The article is one
     of the elements (tuple) from the articles list.
     """
+    article_vector = []
+    for x in articles:
+        if x[0] == article:
+            article_vector = x[3]
+            break
+    return [(np.linalg.norm(article_vector - x[3]),x[0],x[1],x[2],x[3]) for x in articles]
 
 
 def recommended(article, articles, n):
@@ -136,3 +169,8 @@ def recommended(article, articles, n):
     closest to article's word vector centroid. The article is one of the elements
     (tuple) from the articles list.
     """
+    article_recommended = distances(article,articles)
+    article_recommended = sorted(article_recommended,key = lambda x:x[0],reverse = False)
+    article_recommended = article_recommended[1:n+1]
+    article_recommended = [(x[0],x[1],x[2],x[3]) for x in articles]
+    return article_recommended
