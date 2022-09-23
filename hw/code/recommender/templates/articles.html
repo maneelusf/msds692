@@ -14,9 +14,11 @@ a:hover {
 </style>
 <body>
 
-<h1 style="">Articles</h1>
+<h1 style="font-size:130%; font-family:Verdana, sans-serif;">Articles</h1>
 
-ARTICLE TITLES/LINKS
+{% for a in articles %}
+<p style="font-size:70%; font-family:Verdana, sans-serif;"><a href="/article/{{a[0]}}">{{a[1]}}</a></p>
+{% endfor %}
 
 </body>
 </html>
