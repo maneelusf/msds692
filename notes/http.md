@@ -4,6 +4,19 @@ HTTP is the text-based protocol used to pass information between browser and ser
 
 ## Connecting and requesting a page
 
+
+The most simple tool to access remove servers is called telnet. telnet was created in 1969--it is considered not secure today and it it has been mostly used with ssh. 
+
+
+Example :
+
+telnet towel.blinkenlights.nl
+telnet freechess.org 5000
+telnet rainmaker.wunderground.com
+
+
+
+
 Let's communicate with a server that does not require secure connections and access its web server (port 80) the hard way. Here is the protocol for handshaking with the Web server:
 
 ```
