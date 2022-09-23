@@ -133,92 +133,6 @@ if __name__ == '__main__':
 ```
 
 
-### Web server
-
-Besides those core functions, you need to build a web server as well using flask. See the video on [how to launch a flask web server at Amazon](https://www.youtube.com/watch?v=qQncEJL6NHs&t=156s) that I made, but which uses the simple flask web server not gunicorn. We need to use [gunicorn](http://gunicorn.org/) because the "... *Flask’s built-in server is not suitable for production as it doesn’t scale well and by default serves only one request at a time.*" (from the doc). See [Standalone WSGI Containers](http://flask.pocoo.org/docs/1.0/deploying/wsgi-standalone/) for more on using flask with gunicorn. The server should respond to two different URLs: the list of articles is at `/` and each article is at something like `/article/business/353.txt`. The BBC corpus in directory `bbc` is organized with topic subdirectories and then a list of articles as text files:
-
-<img src="figures/bbc.png" width=300>
-
-So, if you are testing from your laptop, you would go to the following URL in your browser to get the list of articles:
-
-`http://localhost:5000/`
-
-And to get to a specific article you would go to:
-
-`http://localhost:5000/article/business/030.txt`
-
-The `localhost:5000` will be replaced with an IP address plus `:5000' or some machine name given to you by Amazon when you deploy your server.
-
-For display purposes, I have given you some CSS to make the pages look good and to have the recommendation box on the right side gutter.   Please figure out how to use font size 70% and font family Verdana, sans-serif for the text just like you see in the examples at the start of this document.
-
-The `server.py` file contains flask "routes" for the necessary URLs. You just have to fill in those functions:
-
-```Python
-@app.route("/")
-def articles():
-    """Show a list of article titles"""
-```
-
-```Python
-@app.route("/article/<topic>/<filename>")
-def article(topic,filename):
-    """
-    Show an article with relative path filename.
-    Assumes the BBC structure of topic/filename.txt
-    so our URLs follow that.
-    """
-```    
-
-Also note that we are using the template engine [jinja2](http://jinja.pocoo.org/docs/2.9/) that is built-in with flask. When you call `render_template()` from within a flask route method, it looks in the `templates` subdirectory for the file indicated in that function call. You need to pass in appropriate arguments to the two different page templates so the pages fill with data.
-
-Now that we are using green unicorn, you don't want to use `app.run()` anymore in your server.py file. Also note that using `-D` option on green unicorn makes it create a daemon process sitting in the background. To kill all of those processes you need to do a few steps:
-
-```bash
-beast:master:~/courses/msds692-private/hw/recommender $ gunicorn -D --threads 1 -b 0.0.0.0:5000 --access-logfile server.log --timeout 60 server:app ~/data/glove.6B/glove.6B.50d.txt ~/github/msds692/data/bbc
-
-beast:master:~/courses/msds692-private/hw/recommender $ ps aux | grep gunicorn
-parrt            71972   0.0  0.0  4267768   1028 s003  S+   11:01AM   0:00.00 grep gunicorn
-parrt            71743   0.0  1.1  4657032 354216   ??  S    11:01AM   0:06.19 /Users/USFCA-MSDS/anaconda3/bin/python /Users/USFCA-MSDS/anaconda3/bin/gunicorn -D --threads 1 -b 0.0.0.0:5000 --access-logfile server.log --timeout 60 server:app /Users/USFCA-MSDS/data/glove.6B/glove.6B.50d.txt /Users/USFCA-MSDS/github/msds692/data/bbc
-parrt            71737   0.0  0.0  4310344  10396   ??  S    11:01AM   0:00.02 /Users/USFCA-MSDS/anaconda3/bin/python /Users/USFCA-MSDS/anaconda3/bin/gunicorn -D --threads 1 -b 0.0.0.0:5000 --access-logfile server.log --timeout 60 server:app /Users/USFCA-MSDS/data/glove.6B/glove.6B.50d.txt /Users/USFCA-MSDS/github/msds692/data/bbc
-
-beast:master:~/courses/msds692-private/hw/recommender $ kill -9 71737
-
-beast:master:~/courses/msds692-private/hw/recommender $ kill -9 71743
-
-beast:master:~/courses/msds692-private/hw/recommender $ ps aux | grep gunicorn
-parrt            72120   0.0  0.0  4267768   1028 s003  S+   11:02AM   0:00.00 grep gunicorn
-```
-
-As you can see, all of the processes for `gunicorn` are now dead. You kill the process ID to make them stop (the number in the second column from `ps`).
-
-### Your server will be attacked
-
-*we moved back to port 5000 this year so this should not be an issue*
-
-"Don't panic!" When you leave your web server up at port 80 for more than a few minutes, you will see people from around the web try to break into your computer. For example, you will see URLs like `/mysql/admin/`, `/phpmyadmin/`, `/dbadmin/`, `/mysql/`. The attacker is trying to use known exploits or default passwords for these various kinds of servers hoping to get in. You will see log entries printed from your flask server that look like this (138.202.1.109 was me):
-
-```
-$ gunicorn -D --threads 4 -b 0.0.0.0:5000 --access-logfile server.log --timeout 60 server:app glove.6B.300d.txt bbc
- * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
-138.202.1.109 - - [20/Sep/2017 20:02:45] "GET / HTTP/1.1" 200 -
-138.202.1.109 - - [20/Sep/2017 20:03:07] "GET / HTTP/1.1" 200 -
-138.202.1.109 - - [20/Sep/2017 20:03:09] "GET / HTTP/1.1" 200 -
-138.202.1.109 - - [20/Sep/2017 20:10:20] "GET / HTTP/1.1" 200 -
-89.133.128.188 - - [20/Sep/2017 20:12:31] "HEAD http://174.129.105.171:5000/dbadmin/ HTTP/1.1" 404 -
-89.133.128.188 - - [20/Sep/2017 20:12:32] "HEAD http://174.129.105.171:5000/pma/ HTTP/1.1" 404 -
-89.133.128.188 - - [20/Sep/2017 20:12:32] "HEAD http://174.129.105.171:5000/db/ HTTP/1.1" 404 -
-89.133.128.188 - - [20/Sep/2017 20:12:32] "HEAD http://174.129.105.171:5000/admin/ HTTP/1.1" 404 -
-89.133.128.188 - - [20/Sep/2017 20:12:32] "HEAD http://174.129.105.171:5000/mysql/ HTTP/1.1" 404 -
-89.133.128.188 - - [20/Sep/2017 20:12:33] "HEAD http://174.129.105.171:5000/database/ HTTP/1.1" 404 -
-89.133.128.188 - - [20/Sep/2017 20:12:33] "HEAD http://174.129.105.171:5000/db/phpmyadmin/ HTTP/1.1" 404 -
-89.133.128.188 - - [20/Sep/2017 20:12:33] "HEAD http://174.129.105.171:5000/db/phpMyAdmin/ HTTP/1.1" 404 -
-89.133.128.188 - - [20/Sep/2017 20:12:33] "HEAD http://174.129.105.171:5000/sqlmanager/ HTTP/1.1" 404 -
-...
-```
-
-It only took 7 minutes for the server to be attacked. It was attacked by four others within a few minutes. Naturally none of the attackers broke in because my flask server doesn't support any of those URLs. According to `whois`, the IP addresses of those connecting to my server were from Austria, India, Hungary, some local Comcast customer, and Australia.  Naturally the attacker is probably exploiting a machine or a proxy in those locations and is in some other location.
-
-Anyway, the upshot is you don't have to worry about these attacks but it's something interesting to be aware of. The Internet is constantly being swept by target acquisition radar. Any server that opens up a port through the firewall will start getting hit almost immediately.
 
 ## Getting started
 
@@ -234,66 +148,6 @@ Download the [starterkit](https://github.com/USFCA-MSDS/msds692/tree/master/hw/c
 
 There are predefined functions with comments indicating the required functionality.
 
-## Launching your server at Amazon
-
-Creating a server that has all the appropriate software can be tricky so I have recorded a sequence that works for me.
-
-The first thing is to launch a server with different software than the simple  Amazon linux we have been using in class. We need one that has, for example, `numpy` and friends so let's use an *image* (snapshot of a disk with a bunch of stuff installed) that already has machine learning software installed.  As of October 2021, the following sequence works. Select image  "*Deep Learning AMI (Ubuntu 18.04) Version 49.0*".  Create a `t2.medium` size computer (in Oregon; it's cheaper)!  The cost is 0.0464 dollars per Hour, which is only 1.12 dollars per day.
-
-Here's how I login:
- 
-```bash
-$ ssh -i "parrt.pem" ubuntu@somemachineIPorname
-```
-
-Then from that remote machine:
-
-```bash
-source activate python3
-pip install --upgrade pip
-pip install numpy Flask
-conda install gunicorn # regular pip install won't work it seems
-```
-
-Numpy and friends should be installed already:
-
-```bash
-ubuntu@ip-172-30-0-118:~$ python
-Python 3.7.6 (default, Jan  8 2020, 19:59:22) 
-[GCC 7.3.0] :: Anaconda, Inc. on linux
-Type "help", "copyright", "credits" or "license" for more information.
->>> import numpy as np
->>> 
-```
-
-After logging in, clone your repository into the home directory:
-
-```bash
-cd ~
-git clone https://github.com/USF-MSDS692/recommender-parrt.git
-cd recommender-parrt
-```
-
-Now, download the data you need and unzip:
-
-```bash
-wget https://s3-us-west-1.amazonaws.com/msan692/glove.6B.300d.txt.zip
-wget https://s3-us-west-1.amazonaws.com/msan692/bbc.zip
-unzip glove.6B.300d.txt.zip
-unzip bbc.zip
-```
-
-You should now be able to run your server:
-
-```bash
-$ gunicorn -D --threads 4 -b 0.0.0.0:5000 --access-logfile server.log --timeout 60 server:app glove.6B.300d.txt bbc
-```
-
-All output goes into `server.log`, even after you log out. The `-D` means put the server in daemon mode, which runs the background. During development, it's a good idea to not use that `-D` option so that error messages come to the standard output.
-
-Don't forget to open up port 5000 in the firewall for the server so that the outside world can access it. Make sure that you test from your laptop! If you go to `http://52.8.56.222:5000/` in your browser, you should see the main list of articles.
-
-Make sure the `IP.txt` file as the **public** IP address of your server with `:5000` on the line by itself, such as `54.198.43.135:5000`!
 
 
 ## Deliverables
@@ -302,25 +156,11 @@ Make sure the `IP.txt` file as the **public** IP address of your server with `:5
 
 In your github repository, you should submit the following:
 
-* IP.txt; this is a single line text file terminated by a newline character that indicates the machine name or IP address of your server at Amazon
+* URL.txt; this is a single line text file terminated by a newline character that indicates the machine name or URL address of your server at Google
 * doc2vec.py; implement `words()`, `doc2vec()`, `distances()`, `recommended()`
-* server.py; implement `articles()`, `article()` flask routes
-* templates/articles.html; use template language to generate the right HTML for the main list of articles page
-* templates/article.html; use template language to generate the right HTML for an article page
 
 **Please do not add data files such as the word vectors or the BBC corpus to your repository!**
 
-### AWS
-
-As part of your submission, you must launch a Linux instance big enough to hold the 300-vectors  at Amazon and install your software + necessary data. Then launch your server and keep it running for the duration of our grading period. We will notify you when it's okay to terminate that instance. Choose a server that is only about 5 cents per hour (either medium or large; not sure).
-
-Here is how I launch my server on AWS (see above) or locally:
- 
-```bash
-$ gunicorn -D --threads 4 -b 0.0.0.0:5000 --access-logfile server.log --timeout 60 server:app glove.6B.300d.txt bbc
-```
-
-All output goes into `server.log`, even after you log out. The `-D` means put the server in daemon mode (the background).  It means we can still access the Web server even though you are not connected with ssh.
 
 Note that you must give fully-qualified pathnames to the word vectors and the root of the BBC article corpus, if they are not in the same directory.
 
@@ -328,10 +168,10 @@ Note that you must give fully-qualified pathnames to the word vectors and the ro
 
 To evaluate your projects, the grader and I will run the [test_server.py](https://github.com/USFCA-MSDS/msds692/blob/master/hw/code/recommender/test_server.py) script, from your repo root directory, that automatically pulls your article list page and a selection of article pages to check that your recommendations match our solution.
 
-**Without the IP.txt file at the root of your repository, we cannot test your server and you get a zero!**  Our script reads your IP.txt file with:
+**Without the IP.txt file at the root of your repository, we cannot test your server and you get a zero!**  Our script reads your URL.txt file with:
 
 ```python
-with open("IP.txt") as f:
+with open("URL.txt") as f:
 	host = f.read().strip()
 ```
 
@@ -342,7 +182,7 @@ It also reads some pickled "truth" data structures that encode the articles from
 Here is a sample test run:
 
 ```bash
-$ cd ~/grading/MSDS692/recommender-parrt
+$ cd ~/grading/MSDS692/recommender-hajij
 $ python -m pytest -v test_server.py
 ============================================ test session starts =============================================
 platform darwin -- Python 2.7.12, pytest-2.9.2, py-1.4.31, pluggy-0.3.1 -- /Users/USFCA-MSDS/anaconda2/bin/python
@@ -360,7 +200,5 @@ test_server.py::test_sample_articles PASSED
 
 *Make sure that your web server process is still running after you break the `ssh` connection by using a browser to connect at your server's public IP address*.
 
-## parrt future notes
 
-*todo: add arg data types and data class for an article object*
 
