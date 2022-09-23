@@ -164,6 +164,14 @@ In your github repository, you should submit the following:
 
 Note that you must give fully-qualified pathnames to the word vectors and the root of the BBC article corpus, if they are not in the same directory.
 
+## Google Cloud Hello World
+
+A hello world for GCP is given here : https://cloud.google.com/run/docs/quickstarts/build-and-deploy/deploy-python-service
+
+After loggin to your GCP account, creating a project. Open a terminal, and then follow the tutorial a step by step as specified above. Basically, you have three files that you need to create, the Dockerfile, the req.txt file and the main.py file.
+
+After you write the file you can deploy by running "gcloud run deploy"
+
 ## Evaluation
 
 To evaluate your projects, the grader and I will run the [test_server.py](https://github.com/USFCA-MSDS/msds692/blob/master/hw/code/recommender/test_server.py) script, from your repo root directory, that automatically pulls your article list page and a selection of article pages to check that your recommendations match our solution.
