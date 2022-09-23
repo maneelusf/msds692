@@ -9,11 +9,13 @@ The most simple tool to access remove servers is called telnet. telnet was creat
 
 
 Example :
-
+```
 telnet towel.blinkenlights.nl
-telnet freechess.org 5000
-telnet rainmaker.wunderground.com
 
+telnet freechess.org 5000
+
+telnet rainmaker.wunderground.com
+```
 
 
 
