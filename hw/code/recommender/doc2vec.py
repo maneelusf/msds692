@@ -125,6 +125,7 @@ def load_articles(articles_dirname, gloves):
     """
     list1 = []
     files = filelist(articles_dirname)
+    files = [file for file in files if file.endswith('txt')]
     for file in files:
         text = get_text(file).split('\n')
         ##.split('\n')
@@ -132,7 +133,7 @@ def load_articles(articles_dirname, gloves):
         text_title = ''.join(text[1:])
         
         
-        list1.append([file,text[0],text_title,doc2vec(words(text_title),gloves)])
+        list1.append([file.split('bbc')[-1],text[0],text_title,doc2vec(words(text_title),gloves)])
     
     return list1
 
@@ -172,5 +173,5 @@ def recommended(article, articles, n):
     article_recommended = distances(article,articles)
     article_recommended = sorted(article_recommended,key = lambda x:x[0],reverse = False)
     article_recommended = article_recommended[1:n+1]
-    article_recommended = [(x[0],x[1],x[2],x[3]) for x in articles]
+    article_recommended = [(x[1],x[2],x[3],x[4]) for x in article_recommended]
     return article_recommended
