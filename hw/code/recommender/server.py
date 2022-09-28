@@ -31,11 +31,11 @@ def article(topic,filename):
     return render_template('article.html',title = article_object[1],paragraphs = [article_object[2]],recommended = recommendations )
 
 # initialization
-#i = sys.argv.index('server:app')
-#glove_filename = sys.argv[i+1]
-#articles_dirname = sys.argv[i+2]
-glove_filename = '/Users/maneelreddy/Downloads/Data Acquisition/msds692/data/glove.6B.300d.txt'
-articles_dirname = '/Users/maneelreddy/Downloads/Data Acquisition/msds692/data/bbc'
+i = sys.argv.index('server:app')
+glove_filename = sys.argv[i+1]
+articles_dirname = sys.argv[i+2]
+# glove_filename = '/Users/maneelreddy/Downloads/Data Acquisition/msds692/data/glove.6B.300d.txt'
+# articles_dirname = '/Users/maneelreddy/Downloads/Data Acquisition/msds692/data/bbc'
 
 gloves = load_glove(glove_filename)
 articles = load_articles(articles_dirname, gloves)
