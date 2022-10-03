@@ -54,7 +54,7 @@ I am generally available on slack or email on-demand.
 |[TFIDF document summarization](https://github.com/USFCA-MSDS/msds692/blob/master/hw/tfidf.md)| 10%| Fri, Sep 23, 1pm |
 |[Recommending Articles](https://github.com/USFCA-MSDS/msds692/blob/master/hw/recommender.md)| 13% | Sun, Oct 03 1am |
 |Exam 1| 27%| Fri, Sep 30 |
-|Exam 2| 33%| Fri, Oct 14 |
+|Exam 2| 33%| Fri, Oct 12 |
 
 *I reserve the right to change projects until the day they are assigned.*
 
