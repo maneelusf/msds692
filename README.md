@@ -52,10 +52,9 @@ I am generally available on slack or email on-demand.
 |[Data pipeline](https://github.com/USFCA-MSDS/msds692/blob/master/hw/pipeline.md)| 5%| Fri, Sep 02 1pm (start of section 2) |
 |[Search Engine Implementation](https://github.com/USFCA-MSDS/msds692/blob/master/hw/search.md)| 12% | Fri, Sep 16, 1pm |
 |[TFIDF document summarization](https://github.com/USFCA-MSDS/msds692/blob/master/hw/tfidf.md)| 10%| Fri, Sep 23, 1pm |
-|[Recommending Articles](https://github.com/USFCA-MSDS/msds692/blob/master/hw/recommender.md)| 9% | Fri, Sep 30 1pm |
-|[Tweet Sentiment Analysis](https://github.com/USFCA-MSDS/msds692/blob/master/hw/sentiment.md)| 9% | Fri, Oct 7 1pm |
-|Exam 1| 25%| Wed, Sep 28 |
-|Exam 2| 30%| Fri, Oct 14 |
+|[Recommending Articles](https://github.com/USFCA-MSDS/msds692/blob/master/hw/recommender.md)| 13% | Sun, Oct 03 1am |
+|Exam 1| 27%| Fri, Sep 30 |
+|Exam 2| 33%| Wed, Oct 12 |
 
 *I reserve the right to change projects until the day they are assigned.*
 
